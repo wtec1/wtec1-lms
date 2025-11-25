@@ -1,0 +1,102 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Live Class - WTEC1 LMS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="shortcut icon" href="../img/icon.ico" type="image/x-icon">
+</head>
+<body class="bg-gray-100 min-h-screen p-4 sm:p-6">
+  <header class="text-center mt-6 mb-6">
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">WTEC1 LMS - Live Class</h1>
+  </header>
+
+  <main class="flex-1 flex flex-col items-center justify-center p-1 sm:p-4">
+    <div class="w-full max-w-6xl bg-white rounded-lg shadow-lg mb-4">
+      <div class="p-2 sm:p-4 md:p-6">
+        <h2 class="text-sm sm:text-lg md:text-xl font-semibold text-center mb-2 sm:mb-4">
+          Live Stream
+        </h2>
+        
+        <!-- Embedded YouTube Live Stream - Optimized for Mobile -->
+        <div id="videoContainer" class="relative w-full mb-3 sm:mb-0" style="padding-bottom: 56.25%; height: 0;">
+          <iframe 
+            id="liveStream"
+            class="absolute top-0 left-0 w-full h-full rounded-md sm:rounded-lg"
+            src="https://www.youtube.com/embed/live_stream?channel=UCjeF__yoBqj6hk-8lMcL8DA&autoplay=1"
+            title="WTEC1 Live Class"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+          
+          <!-- Offline Message Overlay -->
+         
+        </div>
+
+        <div class="mt-3 sm:mt-4 p-3 sm:p-4 bg-blue-50 rounded-lg">
+          <h3 class="font-semibold text-blue-800 mb-2 text-sm sm:text-base">Mobile Viewing Tips:</h3>
+          <ul class="text-xs sm:text-sm text-blue-700 space-y-1">
+            <li>• Rotate phone to landscape for better viewing</li>
+            <li>• Tap fullscreen icon for maximum size</li>
+            <li>• If no sound, tap the video once to unmute</li>
+            <li>• Use "YouTube App" button for best mobile experience</li>
+            <li>• Stream refreshes automatically every page reload</li>
+          </ul>
+        </div>
+
+        <p class="mt-2 sm:mt-3 text-xs sm:text-sm text-gray-600 text-center px-1 sm:px-2">
+          Optimized for mobile viewing. Stream embedded directly from YouTube with full functionality.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Auto-refresh the iframe every 5 minutes to check for live stream updates
+      setInterval(function() {
+        const iframe = document.getElementById('liveStream');
+        const currentSrc = iframe.src;
+        
+        // Force refresh by adding timestamp
+        const separator = currentSrc.includes('?') ? '&' : '?';
+        const baseSrc = currentSrc.split('&t=')[0]; // Remove existing timestamp if any
+        iframe.src = baseSrc + '&t=' + Date.now();
+        
+        console.log('Stream refreshed at:', new Date().toLocaleTimeString());
+      }, 300000); // 300000ms = 5 minutes
+    </script>
+
+    <!-- Fallback Section - For students who miss live stream -->
+    <div class="w-full max-w-6xl bg-white rounded-lg shadow-lg">
+      <div class="p-4 sm:p-6">
+        <h3 class="text-lg sm:text-xl font-semibold text-center mb-3 text-gray-800">
+          Missed the Live Class?
+        </h3>
+        <p class="text-sm sm:text-base text-gray-600 text-center mb-4">
+          When students miss the live stream, they can access the recording or channel here:
+        </p>
+        
+        <div class="flex justify-center">
+          <a href="https://www.youtube.com/channel/UCjeF__yoBqj6hk-8lMcL8DA/live" 
+            
+             rel="noopener noreferrer"
+             class="inline-block bg-red-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-red-700 transition text-center">
+            🎥 Open in YouTube App
+          </a>
+        </div>
+
+        <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+          <p class="text-xs sm:text-sm text-yellow-800 text-center">
+            <strong>Note:</strong> Recordings may be available on the YouTube channel after the live stream ends.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

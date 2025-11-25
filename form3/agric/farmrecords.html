@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Records - Online Live Class</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .shimmer-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        .shimmer-card:hover::before {
+            left: 100%;
+        }
+        .pulse-icon {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-950 via-emerald-950 to-green-950 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- Header -->
+        <header class="text-center mb-12 fade-in">
+            <div class="inline-block mb-6">
+                <div class="text-6xl mb-4 pulse-icon">🌾</div>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-green-400 via-emerald-400 to-lime-400 bg-clip-text text-transparent">
+                Farm Records Management
+            </h1>
+            <p class="text-2xl text-gray-300 mb-2">Essential Documentation for Successful Farming</p>
+            <p class="text-lg text-gray-400">Track, Analyze, and Optimize Your Agricultural Operations</p>
+            
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <button onclick="showSection('types')" class="px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 rounded-xl transition shadow-lg">
+                    Types of Records
+                </button>
+                <button onclick="showSection('inventory')" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl transition shadow-lg">
+                    Inventory Records
+                </button>
+                <button onclick="showSection('production')" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 rounded-xl transition shadow-lg">
+                    Production Records
+                </button>
+                <button onclick="showSection('financial')" class="px-6 py-3 bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 rounded-xl transition shadow-lg">
+                    Financial Records
+                </button>
+                <button onclick="showSection('reasons')" class="px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 rounded-xl transition shadow-lg">
+                    Why Keep Records
+                </button>
+            </div>
+        </header>
+
+        <!-- Types Section -->
+        <section id="types" class="lesson-section">
+            <h2 class="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                Types of Farm Records
+            </h2>
+
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 shadow-2xl border border-green-500 mb-8">
+                <div class="text-center mb-6">
+                    <div class="text-6xl mb-4">📊</div>
+                    <h3 class="text-3xl font-bold text-green-300 mb-4">Three Main Categories</h3>
+                    <p class="text-gray-300 text-lg max-w-4xl mx-auto leading-relaxed">
+                        Farm records are organized into three essential categories that help farmers track every aspect of their agricultural operations systematically.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="shimmer-card bg-gradient-to-br from-blue-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-blue-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">📦</div>
+                    <h3 class="text-2xl font-bold mb-3 text-blue-300 text-center">Inventory Records</h3>
+                    <p class="text-sm text-gray-300 text-center mb-4">Track assets and liabilities on the farm</p>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-lg">
+                        <ul class="text-sm text-gray-300 space-y-2">
+                            <li>• Land and buildings</li>
+                            <li>• Tools and equipment</li>
+                            <li>• Livestock inventory</li>
+                            <li>• Supplies and cash</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-purple-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-purple-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">🌱</div>
+                    <h3 class="text-2xl font-bold mb-3 text-purple-300 text-center">Production Records</h3>
+                    <p class="text-sm text-gray-300 text-center mb-4">Document crop and livestock activities</p>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-lg">
+                        <ul class="text-sm text-gray-300 space-y-2">
+                            <li>• Planting and harvesting</li>
+                            <li>• Feeding and breeding</li>
+                            <li>• Health management</li>
+                            <li>• Yield tracking</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-yellow-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-yellow-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">💰</div>
+                    <h3 class="text-2xl font-bold mb-3 text-yellow-300 text-center">Financial Records</h3>
+                    <p class="text-sm text-gray-300 text-center mb-4">Track income and expenses</p>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-lg">
+                        <ul class="text-sm text-gray-300 space-y-2">
+                            <li>• Sales and purchases</li>
+                            <li>• Cash flow statements</li>
+                            <li>• Profit/loss calculation</li>
+                            <li>• Budget planning</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inventory Section -->
+        <section id="inventory" class="lesson-section hidden">
+            <h2 class="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                Inventory Records
+            </h2>
+
+            <div class="bg-gradient-to-br from-blue-900 to-slate-900 rounded-2xl p-8 shadow-2xl border border-blue-500 mb-8">
+                <div class="text-center mb-6">
+                    <div class="text-6xl mb-4">📋</div>
+                    <h3 class="text-3xl font-bold text-blue-300 mb-4">Track Your Farm's Assets & Liabilities</h3>
+                    <p class="text-gray-300 text-lg max-w-4xl mx-auto leading-relaxed">
+                        Inventory records help identify what you own and what you owe, providing a complete picture of your farm's financial position.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-gradient-to-br from-green-900 to-slate-900 rounded-2xl p-8 shadow-2xl border border-green-500">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-4">✅</div>
+                        <h3 class="text-3xl font-bold text-green-300">Assets</h3>
+                        <p class="text-gray-400 text-sm">What the farm owns</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-green-500">
+                            <h4 class="font-bold mb-2 text-green-400">Land & Buildings</h4>
+                            <p class="text-sm text-gray-300">Farm property, structures, and infrastructure</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-emerald-500">
+                            <h4 class="font-bold mb-2 text-emerald-400">Tools & Equipment</h4>
+                            <p class="text-sm text-gray-300">Machinery, tools, and farming implements</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-lime-500">
+                            <h4 class="font-bold mb-2 text-lime-400">Supplies in Store</h4>
+                            <p class="text-sm text-gray-300">Seeds, fertilizers, feed, and other materials</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-teal-500">
+                            <h4 class="font-bold mb-2 text-teal-400">Livestock</h4>
+                            <p class="text-sm text-gray-300">All animals including cattle, poultry, etc.</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-cyan-500">
+                            <h4 class="font-bold mb-2 text-cyan-400">Cash</h4>
+                            <p class="text-sm text-gray-300">Money at hand and in bank accounts</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-900 to-slate-900 rounded-2xl p-8 shadow-2xl border border-red-500">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-4">⚠️</div>
+                        <h3 class="text-3xl font-bold text-red-300">Liabilities</h3>
+                        <p class="text-gray-400 text-sm">What the farm owes</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-red-500">
+                            <h4 class="font-bold mb-2 text-red-400">Loans</h4>
+                            <p class="text-sm text-gray-300">Bank loans and credit facilities</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-orange-500">
+                            <h4 class="font-bold mb-2 text-orange-400">Debts</h4>
+                            <p class="text-sm text-gray-300">Money owed to suppliers and creditors</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-yellow-500">
+                            <h4 class="font-bold mb-2 text-yellow-400">Pending Payments</h4>
+                            <p class="text-sm text-gray-300">Outstanding bills and obligations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-900 to-purple-900 rounded-2xl p-8 shadow-2xl border border-blue-500">
+                <div class="flex items-start">
+                    <div class="text-5xl mr-6 flex-shrink-0">💡</div>
+                    <div>
+                        <h4 class="text-2xl font-bold mb-4 text-blue-300">Best Practices for Inventory Records</h4>
+                        <ul class="text-gray-300 text-lg leading-relaxed space-y-3">
+                            <li>• <strong>Assign Monetary Values:</strong> All assets should have accurate financial valuations</li>
+                            <li>• <strong>Regular Updates:</strong> Review inventory at least once or twice per year</li>
+                            <li>• <strong>Start of Period Recording:</strong> Document inventory at the beginning of each accounting period</li>
+                            <li>• <strong>Detailed Documentation:</strong> Keep thorough records of all assets and their conditions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Production Section -->
+        <section id="production" class="lesson-section hidden">
+            <h2 class="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Production Records
+            </h2>
+
+            <div class="bg-gradient-to-br from-purple-900 to-slate-900 rounded-2xl p-8 shadow-2xl border border-purple-500 mb-8">
+                <div class="text-center mb-6">
+                    <div class="text-6xl mb-4">📝</div>
+                    <h3 class="text-3xl font-bold text-purple-300 mb-4">Document All Farm Activities</h3>
+                    <p class="text-gray-300 text-lg max-w-4xl mx-auto leading-relaxed">
+                        Production records track specific activities related to crop and livestock management, providing insights into productivity and efficiency.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- Crop Production -->
+                <div class="bg-gradient-to-br from-green-900 to-slate-900 rounded-2xl p-8 shadow-2xl border border-green-500">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-4">🌽</div>
+                        <h3 class="text-3xl font-bold text-green-300">Crop Production Records</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-green-500">
+                            <h4 class="font-bold mb-2 text-green-400">Land Preparation</h4>
+                            <p class="text-sm text-gray-300">Plowing, tilling, and soil preparation activities</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-emerald-500">
+                            <h4 class="font-bold mb-2 text-emerald-400">Planting</h4>
+                            <p class="text-sm text-gray-300">Date, seed variety, spacing, and seed rate</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-lime-500">
+                            <h4 class="font-bold mb-2 text-lime-400">Weeding</h4>
+                            <p class="text-sm text-gray-300">Weed control methods and timing</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-teal-500">
+                            <h4 class="font-bold mb-2 text-teal-400">Fertilizer Application</h4>
+                            <p class="text-sm text-gray-300">Type, amount, and application dates</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-cyan-500">
+                            <h4 class="font-bold mb-2 text-cyan-400">Harvesting</h4>
+                            <p class="text-sm text-gray-300">Harvest dates, yield per unit area</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-blue-500">
+                            <h4 class="font-bold mb-2 text-blue-400">Processing</h4>
+                            <p class="text-sm text-gray-300">Post-harvest handling and storage</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livestock Production -->
+                <div class="bg-gradient-to-br from-orange-900 to-slate-900 rounded-2xl p-8 shadow-2xl border border-orange-500">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-4">🐄</div>
+                        <h3 class="text-3xl font-bold text-orange-300">Livestock Production Records</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-orange-500">
+                            <h4 class="font-bold mb-2 text-orange-400">Feeding</h4>
+                            <p class="text-sm text-gray-300">Daily feed amounts, types, and schedules</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-yellow-500">
+                            <h4 class="font-bold mb-2 text-yellow-400">Dipping</h4>
+                            <p class="text-sm text-gray-300">Parasite control and treatment dates</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-red-500">
+                            <h4 class="font-bold mb-2 text-red-400">Housing</h4>
+                            <p class="text-sm text-gray-300">Shelter maintenance and conditions</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-pink-500">
+                            <h4 class="font-bold mb-2 text-pink-400">Milking</h4>
+                            <p class="text-sm text-gray-300">Daily milk production per animal</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-purple-500">
+                            <h4 class="font-bold mb-2 text-purple-400">Stall Feeding</h4>
+                            <p class="text-sm text-gray-300">Indoor feeding management</p>
+                        </div>
+                        <div class="bg-slate-950 bg-opacity-60 p-5 rounded-xl border-l-4 border-indigo-500">
+                            <h4 class="font-bold mb-2 text-indigo-400">Trimming Hooves</h4>
+                            <p class="text-sm text-gray-300">Hoof care and maintenance schedules</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Types of Livestock Records -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 shadow-2xl border border-purple-500">
+                <h3 class="text-3xl font-bold mb-6 text-center text-purple-400">Detailed Livestock Production Records</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-950 bg-opacity-60 p-6 rounded-xl text-center card-hover">
+                        <div class="text-5xl mb-3">🥛</div>
+                        <h4 class="font-bold text-lg mb-2 text-blue-300">Milking Records</h4>
+                        <p class="text-sm text-gray-300">Number of animals, daily milk yield, production trends</p>
+                    </div>
+                    <div class="bg-slate-950 bg-opacity-60 p-6 rounded-xl text-center card-hover">
+                        <div class="text-5xl mb-3">🌾</div>
+                        <h4 class="font-bold text-lg mb-2 text-green-300">Feeding Records</h4>
+                        <p class="text-sm text-gray-300">Feed rations, weight changes, feed conversion ratios</p>
+                    </div>
+                    <div class="bg-slate-950 bg-opacity-60 p-6 rounded-xl text-center card-hover">
+                        <div class="text-5xl mb-3">🏥</div>
+                        <h4 class="font-bold text-lg mb-2 text-red-300">Health Records</h4>
+                        <p class="text-sm text-gray-300">Illness signs, treatments used, recovery details</p>
+                    </div>
+                    <div class="bg-slate-950 bg-opacity-60 p-6 rounded-xl text-center card-hover">
+                        <div class="text-5xl mb-3">🐑</div>
+                        <h4 class="font-bold text-lg mb-2 text-yellow-300">Breeding Records</h4>
+                        <p class="text-sm text-gray-300">Breeding dates, selection criteria, offspring tracking</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial Section -->
+        <section id="financial" class="lesson-section hidden">
+            <h2 class="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                Financial Records
+            </h2>
+
+            <div class="bg-gradient-to-br from-yellow-900 to-slate-900 rounded-2xl p-8 shadow-2xl border border-yellow-500 mb-8">
+                <div class="text-center mb-6">
+                    <div class="text-6xl mb-4">💵</div>
+                    <h3 class="text-3xl font-bold text-yellow-300 mb-4">Track Income and Expenses</h3>
+                    <p class="text-gray-300 text-lg max-w-4xl mx-auto leading-relaxed">
+                        Financial records are essential for understanding the economic health of your farm and making informed business decisions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="shimmer-card bg-gradient-to-br from-green-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-green-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">📈</div>
+                    <h3 class="text-xl font-bold mb-3 text-green-300 text-center">Income</h3>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-lg">
+                        <ul class="text-sm text-gray-300 space-y-2">
+                            <li>• Crop sales</li>
+                            <li>• Livestock sales</li>
+                            <li>• Product sales (milk, eggs)</li>
+                            <li>• Service income</li>
+                            <li>• Subsidies and grants</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-red-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-red-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">📉</div>
+                    <h3 class="text-xl font-bold mb-3 text-red-300 text-center">Expenses</h3>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-lg">
+                        <ul class="text-sm text-gray-300 space-y-2">
+                            <li>• Seeds and fertilizers</li>
+                            <li>• Animal feed</li>
+                            <li>• Labor costs</li>
+                            <li>• Equipment maintenance</li>
+                            <li>• Utilities and fuel</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-blue-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-blue-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">📊</div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-300 text-center">Analysis</h3>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-lg">
+                        <ul class="text-sm text-gray-300 space-y-2">
+                            <li>• Profit/loss calculation</li>
+                            <li>• Cash flow statements</li>
+                            <li>• Budget planning</li>
+                            <li>• Return on investment</li>
+                            <li>• Break-even analysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-yellow-900 to-orange-900 rounded-2xl p-8 shadow-2xl border border-yellow-500 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-center text-yellow-300">What to Track Daily</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-xl">
+                        <h4 class="font-bold text-yellow-400 mb-2">🗺️ Field Information</h4>
+                        <p class="text-sm text-gray-300">Field size, crop variety, spacing used</p>
+                    </div>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-xl">
+                        <h4 class="font-bold text-green-400 mb-2">🌱 Planting Details</h4>
+                        <p class="text-sm text-gray-300">Date of planting, seed rate, variety</p>
+                    </div>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-xl">
+                        <h4 class="font-bold text-blue-400 mb-2">🔧 Operations</h4>
+                        <p class="text-sm text-gray-300">Weeding dates, disease treatment</p>
+                    </div>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-xl">
+                        <h4 class="font-bold text-purple-400 mb-2">📦 Yields</h4>
+                        <p class="text-sm text-gray-300">Total yield, yield per hectare</p>
+                    </div>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-xl">
+                        <h4 class="font-bold text-orange-400 mb-2">💰 Costs</h4>
+                        <p class="text-sm text-gray-300">Cost of production, expenses</p>
+                    </div>
+                    <div class="bg-slate-950 bg-opacity-60 p-4 rounded-xl">
+                        <h4 class="font-bold text-red-400 mb-2">📅 Dates</h4>
+                        <p class="text-sm text-gray-300">Harvest dates, key milestones</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-green-900 to-emerald-900 rounded-2xl p-8 shadow-2xl border border-green-500">
+                <div class="flex items-start">
+                    <div class="text-6xl mr-6 flex-shrink-0">🎯</div>
+                    <div>
+                        <h4 class="text-2xl font-bold mb-4 text-green-300">Purpose of Financial Records</h4>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-4">
+                            Financial records provide a complete picture of your farm's economic performance. They show cash flow, help calculate profit or loss, and are essential for determining the overall financial health of your farming business.
+                        </p>
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            By maintaining accurate financial records, you can identify profitable enterprises, make informed decisions about resource allocation, and ensure your farm remains economically viable for the long term.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reasons Section -->
+        <section id="reasons" class="lesson-section hidden">
+            <h2 class="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+                Reasons for Keeping Farm Records
+            </h2>
+
+            <div class="bg-gradient-to-br from-orange-900 to-slate-900 rounded-2xl p-8 shadow-2xl border border-orange-500 mb-8">
+                <div class="text-center mb-6">
+                    <div class="text-6xl mb-4">🎯</div>
+                    <h3 class="text-3xl font-bold text-orange-300 mb-4">Why Record Keeping Matters</h3>
+                    <p class="text-gray-300 text-lg max-w-4xl mx-auto leading-relaxed">
+                        Farm records serve many critical purposes that directly impact the success and profitability of your agricultural operations.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="shimmer-card bg-gradient-to-br from-green-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-green-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">💹</div>
+                    <h3 class="text-xl font-bold mb-3 text-green-300">Know Profit or Loss</h3>
+                    <p class="text-sm text-gray-300">Understand the profitability of your farm operations and identify which enterprises are making or losing money.</p>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-blue-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-blue-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">📋</div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-300">Planning & Decision-Making</h3>
+                    <p class="text-sm text-gray-300">Assist in planning future activities and making informed decisions based on historical data and trends.</p>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-purple-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-purple-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">🛡️</div>
+                    <h3 class="text-xl font-bold mb-3 text-purple-300">Insurance Claims</h3>
+                    <p class="text-sm text-gray-300">Provide proof and documentation for insurance claims in case of crop or livestock loss.</p>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-yellow-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-yellow-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">⚖️</div>
+                    <h3 class="text-xl font-bold mb-3 text-yellow-300">Assess Production Viability</h3>
+                    <p class="text-sm text-gray-300">Evaluate whether to continue current production methods or make changes for better efficiency.</p>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-red-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-red-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">📜</div>
+                    <h3 class="text-xl font-bold mb-3 text-red-300">Farm History</h3>
+                    <p class="text-sm text-gray-300">Keep historical information about farm ownership, operations, and spending patterns over time.</p>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-pink-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-pink-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">🏦</div>
+                    <h3 class="text-xl font-bold mb-3 text-pink-300">Obtaining Loans</h3>
+                    <p class="text-sm text-gray-300">Prove farm viability to lenders and secure financial support for expansion or operations.</p>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-indigo-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-indigo-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">💰</div>
+                    <h3 class="text-xl font-bold mb-3 text-indigo-300">Assessment of Income</h3>
+                    <p class="text-sm text-gray-300">Track total income, expenditure, and profit to understand your farm's financial performance.</p>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-teal-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-teal-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">🎖️</div>
+                    <h3 class="text-xl font-bold mb-3 text-teal-300">Determine Profitability</h3>
+                    <p class="text-sm text-gray-300">Identify which crops or livestock offer the highest returns and focus resources accordingly.</p>
+                </div>
+
+                <div class="shimmer-card bg-gradient-to-br from-cyan-900 to-slate-900 rounded-xl p-6 shadow-2xl border border-cyan-500 card-hover">
+                    <div class="text-5xl mb-4 text-center">📊</div>
+                    <h3 class="text-xl font-bold mb-3 text-cyan-300">Performance Tracking</h3>
+                    <p class="text-sm text-gray-300">Monitor farm performance over time and compare results against benchmarks and goals.</p>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-orange-900 to-red-900 rounded-2xl p-8 shadow-2xl border border-orange-500">
+                <div class="flex items-start">
+                    <div class="text-6xl mr-6 flex-shrink-0">✅</div>
+                    <div>
+                        <h4 class="text-2xl font-bold mb-4 text-orange-300">The Bottom Line</h4>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-4">
+                            Farm records are not just paperwork—they are powerful management tools that enable you to make data-driven decisions, maximize profitability, and ensure the long-term success of your agricultural enterprise.
+                        </p>
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            Whether you're a small-scale farmer or managing a large commercial operation, maintaining accurate and up-to-date records is essential for sustainable farming and business growth.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <div class="mt-12 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 shadow-2xl border border-green-500">
+            <h3 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                Key Takeaways
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-950 bg-opacity-60 p-6 rounded-xl">
+                    <div class="text-4xl mb-3 text-center">📚</div>
+                    <h4 class="font-bold text-lg mb-3 text-green-300 text-center">Three Record Types</h4>
+                    <p class="text-gray-300 text-center">Inventory, Production, and Financial records form the foundation of farm management.</p>
+                </div>
+                <div class="bg-slate-950 bg-opacity-60 p-6 rounded-xl">
+                    <div class="text-4xl mb-3 text-center">🎯</div>
+                    <h4 class="font-bold text-lg mb-3 text-blue-300 text-center">Multiple Benefits</h4>
+                    <p class="text-gray-300 text-center">Records help with planning, loan applications, insurance, and profitability analysis.</p>
+                </div>
+                <div class="bg-slate-950 bg-opacity-60 p-6 rounded-xl">
+                    <div class="text-4xl mb-3 text-center">✍️</div>
+                    <h4 class="font-bold text-lg mb-3 text-purple-300 text-center">Daily Recording</h4>
+                    <p class="text-gray-300 text-center">Keep accurate daily records of all farm operations for best results.</p>
+                </div>
+                <div class="bg-slate-950 bg-opacity-60 p-6 rounded-xl">
+                    <div class="text-4xl mb-3 text-center">💡</div>
+                    <h4 class="font-bold text-lg mb-3 text-yellow-300 text-center">Informed Decisions</h4>
+                    <p class="text-gray-300 text-center">Use records to make data-driven decisions that improve farm profitability.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Message -->
+        <div class="mt-8 bg-gradient-to-r from-green-900 to-emerald-900 rounded-2xl p-8 shadow-2xl border border-green-500 text-center">
+            <div class="text-6xl mb-4">🌟</div>
+            <h3 class="text-3xl font-bold mb-4 text-green-300">Start Your Record-Keeping Journey Today!</h3>
+            <p class="text-gray-300 text-lg max-w-3xl mx-auto">
+                By keeping accurate and up-to-date farm records, you can make informed decisions, plan effectively, and ensure your agricultural enterprise remains profitable and sustainable for years to come.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.lesson-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            const targetSection = document.getElementById(sectionId);
+            targetSection.classList.remove('hidden');
+            targetSection.classList.add('fade-in');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show the first section by default
+        showSection('types');
+    </script>
+</body>
+</html>
