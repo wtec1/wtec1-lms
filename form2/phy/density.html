@@ -1,0 +1,1121 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Density - Interactive Learning Module</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes sink {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-sink { animation: sink 3s ease-in-out infinite; }
+        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
+        .animate-pulse-slow { animation: pulse 2s ease-in-out infinite; }
+        .animate-slideIn { animation: slideIn 0.8s ease-out forwards; }
+        .section { opacity: 0; }
+        .section.active { animation: fadeInUp 0.6s ease-out forwards; }
+        
+        .water-fill {
+            background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+            transition: height 0.8s ease-out;
+        }
+        
+        .progress-bar {
+            transition: width 0.3s ease-out;
+        }
+
+        .experiment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-option {
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            transform: translateX(10px);
+            background: #f0f9ff;
+        }
+
+        .quiz-option.correct {
+            background: #dcfce7;
+            border-color: #22c55e;
+        }
+
+        .quiz-option.incorrect {
+            background: #fee2e2;
+            border-color: #ef4444;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-white rounded-full p-2">
+                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">Millennium eLearning Centre</h1>
+                        <p class="text-blue-100 text-sm">Unit 8: Understanding Density</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="bg-white bg-opacity-20 rounded-lg px-4 py-2">
+                        <span class="text-sm font-semibold">Progress: <span id="progress-text">0%</span></span>
+                    </div>
+                </div>
+            </div>
+            <!-- Progress Bar -->
+            <div class="w-full bg-white bg-opacity-20 rounded-full h-2 mt-3">
+                <div id="progress-bar" class="progress-bar bg-yellow-400 h-2 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-20 z-40">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-1 overflow-x-auto py-2">
+                <button onclick="showSection(0)" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition bg-blue-600 text-white">Introduction</button>
+                <button onclick="showSection(1)" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition hover:bg-gray-100">Experiments</button>
+                <button onclick="showSection(2)" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition hover:bg-gray-100">Calculations</button>
+                <button onclick="showSection(3)" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition hover:bg-gray-100">Temperature Effects</button>
+                <button onclick="showSection(4)" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition hover:bg-gray-100">Applications</button>
+                <button onclick="showSection(5)" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition hover:bg-gray-100">Interactive Quiz</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Section 0: Introduction -->
+        <section id="section-0" class="section active mb-12">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <h2 class="text-4xl font-bold text-gray-800">What is Density?</h2>
+                    <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-600">
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            <span class="font-bold text-blue-600">Density</span> is the mass of a substance per unit volume. It tells us how tightly matter is packed together.
+                        </p>
+                        <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                            <p class="font-mono text-xl text-center text-blue-800">ρ = m / V</p>
+                            <p class="text-sm text-gray-600 text-center mt-2">Where ρ = density, m = mass, V = volume</p>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-4">
+                            <div class="text-center p-3 bg-gradient-to-br from-blue-100 to-blue-50 rounded-lg">
+                                <p class="text-sm text-gray-600">SI Unit</p>
+                                <p class="font-bold text-blue-700">kg/m³</p>
+                            </div>
+                            <div class="text-center p-3 bg-gradient-to-br from-purple-100 to-purple-50 rounded-lg">
+                                <p class="text-sm text-gray-600">Also Used</p>
+                                <p class="font-bold text-purple-700">g/cm³</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                        <h3 class="font-bold text-green-800 mb-3 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                            </svg>
+                            Key Facts
+                        </h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2">•</span>
+                                <span>Density is a <strong>derived quantity</strong> from mass and volume</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2">•</span>
+                                <span>Different materials have different densities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2">•</span>
+                                <span>Density helps us identify substances</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-8 shadow-xl">
+                        <h3 class="text-center font-bold text-gray-800 mb-6">Density Comparison</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white rounded-lg p-4 animate-slideIn" style="animation-delay: 0.1s">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-gray-700 rounded-lg animate-sink"></div>
+                                        <div>
+                                            <p class="font-bold text-gray-800">Iron</p>
+                                            <p class="text-sm text-gray-600">Solid</p>
+                                        </div>
+                                    </div>
+                                    <p class="font-mono text-blue-600 font-bold">7800 kg/m³</p>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 animate-slideIn" style="animation-delay: 0.3s">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-blue-400 rounded-lg" style="animation: float 4s ease-in-out infinite"></div>
+                                        <div>
+                                            <p class="font-bold text-gray-800">Water</p>
+                                            <p class="text-sm text-gray-600">Liquid</p>
+                                        </div>
+                                    </div>
+                                    <p class="font-mono text-blue-600 font-bold">1000 kg/m³</p>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 animate-slideIn" style="animation-delay: 0.5s">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-gray-200 rounded-lg animate-float"></div>
+                                        <div>
+                                            <p class="font-bold text-gray-800">Air</p>
+                                            <p class="text-sm text-gray-600">Gas</p>
+                                        </div>
+                                    </div>
+                                    <p class="font-mono text-blue-600 font-bold">1.3 kg/m³</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Experiments -->
+        <section id="section-1" class="section mb-12 hidden">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8">Density Experiments</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Experiment 1 -->
+                <div class="experiment-card bg-white rounded-xl shadow-lg p-6 transition duration-300">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-4 mb-4">
+                        <h3 class="font-bold text-lg">Experiment 1</h3>
+                        <p class="text-sm text-blue-100">Mass vs Volume of Water</p>
+                    </div>
+                    <div class="space-y-3 text-gray-700">
+                        <p class="font-semibold text-blue-600">Objective:</p>
+                        <p class="text-sm">Determine the relationship between mass and volume of water</p>
+                        
+                        <p class="font-semibold text-blue-600 mt-4">Apparatus:</p>
+                        <ul class="text-sm space-y-1">
+                            <li>• Measuring cylinder</li>
+                            <li>• Beam balance</li>
+                            <li>• Water</li>
+                        </ul>
+                        
+                        <p class="font-semibold text-blue-600 mt-4">Key Finding:</p>
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-3 mt-2">
+                            <p class="text-sm text-green-800">The ratio of mass to volume remains <strong>constant</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experiment 2 -->
+                <div class="experiment-card bg-white rounded-xl shadow-lg p-6 transition duration-300">
+                    <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg p-4 mb-4">
+                        <h3 class="font-bold text-lg">Experiment 2</h3>
+                        <p class="text-sm text-purple-100">Irregular Solid Density</p>
+                    </div>
+                    <div class="space-y-3 text-gray-700">
+                        <p class="font-semibold text-purple-600">Method:</p>
+                        <p class="text-sm">Displacement method using water</p>
+                        
+                        <div class="bg-purple-50 rounded-lg p-3 my-3">
+                            <p class="text-sm font-mono text-center">V = V₂ - V₁</p>
+                            <p class="text-xs text-center text-gray-600 mt-1">Volume = Final - Initial</p>
+                        </div>
+                        
+                        <p class="font-semibold text-purple-600">Steps:</p>
+                        <ol class="text-sm space-y-1">
+                            <li>1. Measure mass of stone</li>
+                            <li>2. Record initial water level (V₁)</li>
+                            <li>3. Submerge stone, record V₂</li>
+                            <li>4. Calculate: ρ = m / (V₂ - V₁)</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Experiment 3 -->
+                <div class="experiment-card bg-white rounded-xl shadow-lg p-6 transition duration-300">
+                    <div class="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-lg p-4 mb-4">
+                        <h3 class="font-bold text-lg">Experiment 3</h3>
+                        <p class="text-sm text-green-100">Regular Solid Density</p>
+                    </div>
+                    <div class="space-y-3 text-gray-700">
+                        <p class="font-semibold text-green-600">Example:</p>
+                        <p class="text-sm">Iron block (3cm × 4cm × 2cm)</p>
+                        
+                        <div class="bg-green-50 rounded-lg p-3 my-3">
+                            <p class="text-sm font-mono text-center">V = l × w × h</p>
+                            <p class="text-xs text-center text-gray-600 mt-1">Volume from dimensions</p>
+                        </div>
+                        
+                        <p class="font-semibold text-green-600">Process:</p>
+                        <ol class="text-sm space-y-1">
+                            <li>1. Measure mass (m)</li>
+                            <li>2. Measure length, width, height</li>
+                            <li>3. Calculate volume</li>
+                            <li>4. Calculate: ρ = m / V</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Experiment 4 -->
+                <div class="experiment-card bg-white rounded-xl shadow-lg p-6 transition duration-300">
+                    <div class="bg-gradient-to-br from-cyan-500 to-cyan-600 text-white rounded-lg p-4 mb-4">
+                        <h3 class="font-bold text-lg">Experiment 4</h3>
+                        <p class="text-sm text-cyan-100">Liquid Density</p>
+                    </div>
+                    <div class="space-y-3 text-gray-700">
+                        <p class="font-semibold text-cyan-600">Apparatus:</p>
+                        <ul class="text-sm space-y-1">
+                            <li>• Measuring cylinder</li>
+                            <li>• Beam balance</li>
+                            <li>• Liquid sample</li>
+                        </ul>
+                        
+                        <div class="bg-cyan-50 rounded-lg p-3 my-3">
+                            <p class="text-sm font-mono text-center">ρ = (m₂ - m₁) / V</p>
+                            <p class="text-xs text-center text-gray-600 mt-1">m₁ = empty, m₂ = with liquid</p>
+                        </div>
+                        
+                        <p class="font-semibold text-cyan-600">Key Point:</p>
+                        <p class="text-sm">Subtract cylinder mass to get liquid mass only</p>
+                    </div>
+                </div>
+
+                <!-- Experiment 5 -->
+                <div class="experiment-card bg-white rounded-xl shadow-lg p-6 transition duration-300">
+                    <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-lg p-4 mb-4">
+                        <h3 class="font-bold text-lg">Experiment 5</h3>
+                        <p class="text-sm text-orange-100">Gas (Air) Density</p>
+                    </div>
+                    <div class="space-y-3 text-gray-700">
+                        <p class="font-semibold text-orange-600">Challenge:</p>
+                        <p class="text-sm">Measuring very low mass of air</p>
+                        
+                        <p class="font-semibold text-orange-600 mt-3">Method:</p>
+                        <ul class="text-sm space-y-1">
+                            <li>• Pump air into container</li>
+                            <li>• ~130 pump strokes</li>
+                            <li>• Measure before/after mass</li>
+                            <li>• Collect 800 cm³ in cylinder</li>
+                        </ul>
+                        
+                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-3 mt-3">
+                            <p class="text-sm text-orange-800">Air has the <strong>lowest</strong> density among states of matter</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Egg Test Experiment -->
+                <div class="experiment-card bg-white rounded-xl shadow-lg p-6 transition duration-300">
+                    <div class="bg-gradient-to-br from-pink-500 to-pink-600 text-white rounded-lg p-4 mb-4">
+                        <h3 class="font-bold text-lg">Practical Test</h3>
+                        <p class="text-sm text-pink-100">Fresh vs Rotten Egg</p>
+                    </div>
+                    <div class="space-y-3 text-gray-700">
+                        <p class="font-semibold text-pink-600">Application:</p>
+                        <p class="text-sm">Using density to test egg freshness</p>
+                        
+                        <p class="font-semibold text-pink-600 mt-3">Results:</p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <span><strong>Sinks flat:</strong> Fresh egg</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <span><strong>Stands up:</strong> Older egg</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <span><strong>Floats:</strong> Rotten egg</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-pink-50 rounded-lg p-3 mt-3">
+                            <p class="text-xs text-gray-600">As eggs age, air enters increasing buoyancy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Calculations -->
+        <section id="section-2" class="section mb-12 hidden">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8">Density Calculations</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Example 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg p-4 mb-6">
+                        <h3 class="font-bold text-xl">Example 1: Box Density</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <p class="font-semibold text-blue-800 mb-2">Given:</p>
+                            <ul class="space-y-1 text-gray-700">
+                                <li>• Length = 20 cm</li>
+                                <li>• Width = 5 cm</li>
+                                <li>• Height = 5 cm</li>
+                                <li>• Mass = 80 g</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-l-4 border-blue-600 pl-4 space-y-3">
+                            <div>
+                                <p class="font-semibold text-gray-800">Step 1: Calculate Volume</p>
+                                <p class="font-mono text-lg text-blue-600">V = l × w × h</p>
+                                <p class="font-mono text-lg text-blue-600">V = 20 × 5 × 5 = 500 cm³</p>
+                            </div>
+                            
+                            <div>
+                                <p class="font-semibold text-gray-800">Step 2: Calculate Density</p>
+                                <p class="font-mono text-lg text-blue-600">ρ = m / V</p>
+                                <p class="font-mono text-lg text-blue-600">ρ = 80 / 500</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border-2 border-green-500">
+                            <p class="font-semibold text-gray-800 mb-2">Answer:</p>
+                            <p class="font-mono text-2xl text-green-700 font-bold">ρ = 0.16 g/cm³</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg p-4 mb-6">
+                        <h3 class="font-bold text-xl">Example 2: Metal Rod Mass</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <p class="font-semibold text-purple-800 mb-2">Given:</p>
+                            <ul class="space-y-1 text-gray-700">
+                                <li>• Density = 500 kg/m³</li>
+                                <li>• Volume = 25 m³</li>
+                                <li>• Find: Mass</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-l-4 border-purple-600 pl-4 space-y-3">
+                            <div>
+                                <p class="font-semibold text-gray-800">Step 1: Use Density Formula</p>
+                                <p class="font-mono text-lg text-purple-600">ρ = m / V</p>
+                                <p class="text-gray-600">Rearrange to solve for mass:</p>
+                                <p class="font-mono text-lg text-purple-600">m = ρ × V</p>
+                            </div>
+                            
+                            <div>
+                                <p class="font-semibold text-gray-800">Step 2: Substitute Values</p>
+                                <p class="font-mono text-lg text-purple-600">m = 500 × 25</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border-2 border-green-500">
+                            <p class="font-semibold text-gray-800 mb-2">Answer:</p>
+                            <p class="font-mono text-2xl text-green-700 font-bold">m = 12,500 kg</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Calculator -->
+            <div class="mt-8 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Interactive Density Calculator</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Mass (g)</label>
+                        <input type="number" id="calc-mass" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="Enter mass">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Volume (cm³)</label>
+                        <input type="number" id="calc-volume" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="Enter volume">
+                    </div>
+                    <div class="flex items-end">
+                        <button onclick="calculateDensity()" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition duration-300">
+                            Calculate
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="calc-result" class="mt-6 hidden">
+                    <div class="bg-white rounded-lg p-6 text-center shadow-md">
+                        <p class="text-gray-700 mb-2">Density:</p>
+                        <p id="calc-answer" class="text-4xl font-bold text-blue-600"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Temperature Effects -->
+        <section id="section-3" class="section mb-12 hidden">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8">Temperature Effects on Density</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- General Effect -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-lg p-4 mb-6">
+                        <h3 class="font-bold text-xl flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                            </svg>
+                            Heating Solids
+                        </h3>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-red-50 rounded-lg p-6 border-l-4 border-red-500">
+                            <p class="font-semibold text-gray-800 mb-4">When Temperature Increases:</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                                    <p class="text-gray-700">Mass stays <strong>constant</strong></p>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                                    <p class="text-gray-700">Volume <strong>increases</strong></p>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                                    <p class="text-gray-700">Density <strong>decreases</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-4 border border-orange-300">
+                            <p class="text-center font-mono text-xl text-orange-800">
+                                ↑ Temperature → ↑ Volume → ↓ Density
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-sm text-gray-600 italic">Since ρ = m/V, when V increases and m stays constant, ρ must decrease</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Water Anomaly -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg p-4 mb-6">
+                        <h3 class="font-bold text-xl flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"/>
+                            </svg>
+                            Water's Special Behavior
+                        </h3>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 rounded-lg p-6 border-l-4 border-blue-500">
+                            <p class="font-semibold text-blue-800 mb-3">Anomalous Expansion</p>
+                            <p class="text-gray-700 mb-4">Water behaves unusually between 4°C and 0°C:</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-blue-600 rounded-full"></div>
+                                    <span class="text-gray-700">At <strong>4°C</strong>: Maximum density</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-cyan-600 rounded-full"></div>
+                                    <span class="text-gray-700">Below 4°C: Density decreases</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-gray-400 rounded-full"></div>
+                                    <span class="text-gray-700">At 0°C: Ice floats on water</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border-2 border-blue-300 rounded-lg p-6">
+                            <p class="font-semibold text-gray-800 mb-4 text-center">Why Ice Floats</p>
+                            <div class="flex justify-center space-x-4 mb-4">
+                                <div class="text-center">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-blue-200 to-blue-100 rounded-lg animate-float mx-auto mb-2 flex items-center justify-center">
+                                        <span class="text-2xl">🧊</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600">Ice</p>
+                                    <p class="text-xs font-mono text-blue-600">Lower density</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-400 rounded-lg animate-sink mx-auto mb-2 flex items-center justify-center">
+                                        <span class="text-2xl">💧</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600">Water</p>
+                                    <p class="text-xs font-mono text-blue-600">Higher density</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 text-center">Ice has lower density than water, so it floats</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Effects of Water Behavior -->
+            <div class="mt-8 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Effects of Water's Unusual Expansion</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition duration-300">
+                        <div class="text-4xl text-center mb-4">🏞️</div>
+                        <h4 class="font-bold text-lg text-gray-800 mb-3 text-center">Freezing Lakes</h4>
+                        <p class="text-gray-700 text-sm leading-relaxed">
+                            In winter, ice forms on the surface while water below stays at 4°C. This allows fish and aquatic life to survive beneath the ice layer.
+                        </p>
+                        <div class="mt-4 bg-blue-50 rounded-lg p-3">
+                            <p class="text-xs text-blue-800">Denser water (4°C) sinks, protecting life below</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition duration-300">
+                        <div class="text-4xl text-center mb-4">💥</div>
+                        <h4 class="font-bold text-lg text-gray-800 mb-3 text-center">Bursting Pipes</h4>
+                        <p class="text-gray-700 text-sm leading-relaxed">
+                            When water freezes in pipes, it expands. This increased volume creates enormous pressure that can cause pipes to burst.
+                        </p>
+                        <div class="mt-4 bg-red-50 rounded-lg p-3">
+                            <p class="text-xs text-red-800">Expansion force can crack metal pipes</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition duration-300">
+                        <div class="text-4xl text-center mb-4">⛰️</div>
+                        <h4 class="font-bold text-lg text-gray-800 mb-3 text-center">Weathering Rocks</h4>
+                        <p class="text-gray-700 text-sm leading-relaxed">
+                            Water enters rock cracks. When it freezes and expands, it breaks rocks apart through mechanical weathering over time.
+                        </p>
+                        <div class="mt-4 bg-gray-100 rounded-lg p-3">
+                            <p class="text-xs text-gray-700">Natural process shapes landscapes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Applications -->
+        <section id="section-4" class="section mb-12 hidden">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8">Applications of Density</h2>
+            
+            <!-- Relative Density -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg p-4 mb-6">
+                    <h3 class="font-bold text-2xl">Relative Density</h3>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div class="bg-indigo-50 rounded-lg p-6 border-l-4 border-indigo-600">
+                            <p class="font-semibold text-indigo-800 mb-3">Definition:</p>
+                            <p class="text-gray-700">The ratio of the mass of a substance to the mass of an equal volume of water</p>
+                            
+                            <div class="mt-4 bg-white rounded-lg p-4">
+                                <p class="font-mono text-xl text-center text-indigo-700">RD = Mass of substance / Mass of equal volume of water</p>
+                            </div>
+                            
+                            <div class="mt-4 bg-yellow-50 rounded-lg p-3 border border-yellow-300">
+                                <p class="text-sm text-yellow-800"><strong>Important:</strong> Relative Density has NO UNITS</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 border border-green-300">
+                            <p class="font-semibold text-green-800 mb-3">Alternative Definition:</p>
+                            <p class="text-gray-700">RD can also be expressed as:</p>
+                            <p class="font-mono text-center text-lg text-green-700 mt-2">RD = Density of substance / Density of water</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg p-6">
+                        <h4 class="font-bold text-gray-800 mb-4">Example Calculation:</h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-white rounded-lg p-4">
+                                <p class="font-semibold text-gray-700">Given:</p>
+                                <ul class="mt-2 space-y-1 text-gray-600">
+                                    <li>• Empty bottle mass = 20 g</li>
+                                    <li>• Bottle + water = 40 g</li>
+                                    <li>• Bottle + liquid X = 30 g</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg p-4">
+                                <p class="font-semibold text-gray-700 mb-2">Calculations:</p>
+                                <p class="text-gray-600">Mass of water = 40 - 20 = <span class="font-bold text-blue-600">20 g</span></p>
+                                <p class="text-gray-600">Mass of liquid X = 30 - 20 = <span class="font-bold text-purple-600">10 g</span></p>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-green-100 to-emerald-100 rounded-lg p-4 border-2 border-green-500">
+                                <p class="font-semibold text-gray-800 mb-2">Answer:</p>
+                                <p class="font-mono text-lg text-green-700">RD = 10/20 = 0.5</p>
+                                <p class="text-xs text-gray-600 mt-2">Liquid X is half as dense as water</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Average Density -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <div class="bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg p-4 mb-6">
+                    <h3 class="font-bold text-2xl">Average Density & Floating</h3>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <div class="bg-cyan-50 rounded-lg p-6 border-l-4 border-cyan-600">
+                            <p class="font-semibold text-cyan-800 mb-3">Concept:</p>
+                            <p class="text-gray-700">Average density considers the total mass and total volume, including hollow spaces filled with air</p>
+                            
+                            <div class="mt-4 bg-white rounded-lg p-4">
+                                <p class="font-mono text-center text-cyan-700">Average Density = Total Mass / Total Volume</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border-2 border-blue-300 rounded-lg p-6">
+                            <p class="font-semibold text-gray-800 mb-4">Iron Pin vs Iron Plate:</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-gray-700 rounded-full animate-sink flex items-center justify-center text-white">📌</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Iron Pin: Sinks</p>
+                                        <p class="text-sm text-gray-600">Density > water (solid iron)</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-gray-500 rounded-lg animate-float flex items-center justify-center text-white">▭</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Iron Plate: Floats</p>
+                                        <p class="text-sm text-gray-600">Average density < water (contains air)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-br from-blue-100 to-cyan-100 rounded-lg p-6">
+                            <h4 class="font-bold text-gray-800 mb-4 text-center">Why Ships Float</h4>
+                            <div class="text-center mb-4">
+                                <div class="text-6xl">🚢</div>
+                            </div>
+                            <p class="text-gray-700 text-center mb-4">
+                                Despite being made of steel, ships float because their average density (steel + air inside) is less than water
+                            </p>
+                            <div class="bg-white rounded-lg p-4">
+                                <p class="text-sm text-center text-gray-600 font-mono">
+                                    ρ<sub>ship average</sub> < ρ<sub>water</sub> → Ship floats
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-white rounded-lg p-4 shadow-md text-center">
+                                <div class="text-3xl mb-2">🎈</div>
+                                <p class="text-xs font-semibold text-gray-700">Balloons</p>
+                                <p class="text-xs text-gray-500">Float in air</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 shadow-md text-center">
+                                <div class="text-3xl mb-2">🛳️</div>
+                                <p class="text-xs font-semibold text-gray-700">Submarines</p>
+                                <p class="text-xs text-gray-500">Control buoyancy</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 shadow-md text-center">
+                                <div class="text-3xl mb-2">🎪</div>
+                                <p class="text-xs font-semibold text-gray-700">Airships</p>
+                                <p class="text-xs text-gray-500">Lighter than air</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alloys -->
+            <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl shadow-lg p-8">
+                <div class="bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg p-4 mb-6">
+                    <h3 class="font-bold text-2xl">Density of Alloys</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg p-6">
+                        <p class="font-semibold text-amber-800 mb-3">What are Alloys?</p>
+                        <p class="text-gray-700 mb-4">Mixtures of two or more metals combined to improve properties</p>
+                        
+                        <div class="bg-amber-50 rounded-lg p-4 border border-amber-300">
+                            <p class="text-sm text-gray-700 mb-2"><strong>Key Property:</strong></p>
+                            <p class="text-sm text-gray-600">The density of an alloy lies between the densities of the pure metals used to make it</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6">
+                        <p class="font-semibold text-orange-800 mb-4">Example:</p>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-gray-100 rounded">
+                                <span class="text-gray-700">Metal A</span>
+                                <span class="font-mono text-blue-600">5000 kg/m³</span>
+                            </div>
+                            <div class="flex justify-center">
+                                <div class="text-2xl text-orange-600">+</div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-100 rounded">
+                                <span class="text-gray-700">Metal B</span>
+                                <span class="font-mono text-blue-600">9000 kg/m³</span>
+                            </div>
+                            <div class="flex justify-center">
+                                <div class="text-2xl text-orange-600">↓</div>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gradient-to-r from-orange-100 to-amber-100 rounded border-2 border-orange-500">
+                                <span class="text-gray-800 font-bold">Alloy A+B</span>
+                                <span class="font-mono text-orange-700 font-bold">5000 < ρ < 9000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Quiz -->
+        <section id="section-5" class="section mb-12 hidden">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Test Your Knowledge</h2>
+            
+            <div class="max-w-4xl mx-auto space-y-8">
+                <!-- Question 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-start space-x-4 mb-6">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">1</div>
+                        <p class="text-lg font-semibold text-gray-800">What is the SI unit of density?</p>
+                    </div>
+                    <div class="space-y-3 ml-14">
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">A)</span> g/cm³
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, true)">
+                            <span class="font-semibold">B)</span> kg/m³
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">C)</span> kg/cm³
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">D)</span> g/m³
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-start space-x-4 mb-6">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">2</div>
+                        <p class="text-lg font-semibold text-gray-800">A substance has a mass of 200g and a volume of 50cm³. What is its density?</p>
+                    </div>
+                    <div class="space-y-3 ml-14">
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">A)</span> 2.5 g/cm³
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, true)">
+                            <span class="font-semibold">B)</span> 4 g/cm³
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">C)</span> 10 g/cm³
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">D)</span> 0.25 g/cm³
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-start space-x-4 mb-6">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">3</div>
+                        <p class="text-lg font-semibold text-gray-800">What happens to the density of most solids when they are heated?</p>
+                    </div>
+                    <div class="space-y-3 ml-14">
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">A)</span> It increases
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, true)">
+                            <span class="font-semibold">B)</span> It decreases
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">C)</span> It stays the same
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">D)</span> It doubles
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <!-- Question 4 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-start space-x-4 mb-6">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">4</div>
+                        <p class="text-lg font-semibold text-gray-800">At what temperature is water's density at its maximum?</p>
+                    </div>
+                    <div class="space-y-3 ml-14">
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">A)</span> 0°C
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, true)">
+                            <span class="font-semibold">B)</span> 4°C
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">C)</span> 10°C
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">D)</span> 100°C
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-start space-x-4 mb-6">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">5</div>
+                        <p class="text-lg font-semibold text-gray-800">Why do ships made of steel float on water?</p>
+                    </div>
+                    <div class="space-y-3 ml-14">
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">A)</span> Steel is less dense than water
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, true)">
+                            <span class="font-semibold">B)</span> The average density of the ship (steel + air) is less than water
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">C)</span> Steel repels water
+                        </div>
+                        <div class="quiz-option border-2 border-gray-300 rounded-lg p-4 cursor-pointer" onclick="checkAnswer(this, false)">
+                            <span class="font-semibold">D)</span> Water pushes ships upward
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Score Display -->
+                <div id="quiz-score" class="hidden">
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl shadow-lg p-8 text-center border-2 border-green-500">
+                        <div class="text-6xl mb-4">🎉</div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Quiz Complete!</h3>
+                        <p class="text-xl text-gray-700">Your Score: <span id="final-score" class="font-bold text-green-600"></span></p>
+                        <button onclick="resetQuiz()" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition duration-300">
+                            Try Again
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-300">© 2024 Millennium eLearning Centre</p>
+            <p class="text-gray-400 text-sm mt-2">Quality Education for the Digital Age</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentSection = 0;
+        let quizScore = 0;
+        let questionsAnswered = 0;
+        const totalSections = 6;
+
+        function showSection(index) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(`section-${index}`);
+            targetSection.classList.remove('hidden');
+            setTimeout(() => targetSection.classList.add('active'), 10);
+
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('hover:bg-gray-100');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('hover:bg-gray-100');
+                }
+            });
+
+            currentSection = index;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = ((currentSection + 1) / totalSections) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+        }
+
+        function calculateDensity() {
+            const mass = parseFloat(document.getElementById('calc-mass').value);
+            const volume = parseFloat(document.getElementById('calc-volume').value);
+            
+            if (isNaN(mass) || isNaN(volume) || volume === 0) {
+                alert('Please enter valid numbers for mass and volume');
+                return;
+            }
+            
+            const density = mass / volume;
+            const resultDiv = document.getElementById('calc-result');
+            const answerSpan = document.getElementById('calc-answer');
+            
+            answerSpan.textContent = density.toFixed(2) + ' g/cm³';
+            resultDiv.classList.remove('hidden');
+            
+            // Add animation
+            resultDiv.style.opacity = '0';
+            setTimeout(() => {
+                resultDiv.style.transition = 'opacity 0.5s';
+                resultDiv.style.opacity = '1';
+            }, 10);
+        }
+
+        function checkAnswer(element, isCorrect) {
+            // Prevent multiple clicks on same question
+            const parent = element.parentElement;
+            const options = parent.querySelectorAll('.quiz-option');
+            let alreadyAnswered = false;
+            
+            options.forEach(opt => {
+                if (opt.classList.contains('correct') || opt.classList.contains('incorrect')) {
+                    alreadyAnswered = true;
+                }
+            });
+            
+            if (alreadyAnswered) return;
+            
+            questionsAnswered++;
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                quizScore++;
+                
+                // Add checkmark
+                element.innerHTML += ' <span class="float-right text-green-600 font-bold">✓ Correct!</span>';
+            } else {
+                element.classList.add('incorrect');
+                
+                // Add X mark
+                element.innerHTML += ' <span class="float-right text-red-600 font-bold">✗ Incorrect</span>';
+                
+                // Show correct answer
+                options.forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                        opt.innerHTML += ' <span class="float-right text-green-600 font-bold">✓ Correct Answer</span>';
+                    }
+                });
+            }
+            
+            // Disable all options
+            options.forEach(opt => {
+                opt.style.cursor = 'not-allowed';
+                opt.onclick = null;
+            });
+            
+            // Check if all questions answered
+            if (questionsAnswered === 5) {
+                setTimeout(showQuizResults, 1000);
+            }
+        }
+
+        function showQuizResults() {
+            const scoreDiv = document.getElementById('quiz-score');
+            const finalScore = document.getElementById('final-score');
+            
+            finalScore.textContent = quizScore + ' / 5';
+            scoreDiv.classList.remove('hidden');
+            
+            // Scroll to results
+            scoreDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetQuiz() {
+            quizScore = 0;
+            questionsAnswered = 0;
+            
+            // Reset all options
+            const allOptions = document.querySelectorAll('.quiz-option');
+            allOptions.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+                
+                // Remove feedback text
+                const feedback = opt.querySelector('span.float-right');
+                if (feedback) feedback.remove();
+                
+                // Re-enable onclick
+                const isCorrect = opt.getAttribute('data-correct') === 'true';
+                opt.onclick = function() { checkAnswer(this, isCorrect); };
+            });
+            
+            // Hide score
+            document.getElementById('quiz-score').classList.add('hidden');
+            
+            // Scroll to top of quiz
+            document.getElementById('section-5').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Set data-correct attributes for easier reset
+        document.addEventListener('DOMContentLoaded', function() {
+            const allOptions = document.querySelectorAll('.quiz-option');
+            allOptions.forEach(opt => {
+                const isCorrect = opt.getAttribute('onclick').includes('true');
+                opt.setAttribute('data-correct', isCorrect);
+            });
+        });
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
