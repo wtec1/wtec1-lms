@@ -1,0 +1,402 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender and Agricultural Production</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        .slide-in { animation: slideIn 0.5s ease-out forwards; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .progress-bar { transition: width 0.5s ease; }
+        .section { opacity: 0; }
+        .section.visible { animation: fadeIn 0.8s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg text-center">
+        <div class="max-w-6xl mx-auto px-6 py-8">
+            <h1 class="text-4xl font-bold mb-2 fade-in">Gender and Agricultural Production</h1>
+            <p class="text-green-100 text-lg fade-in">Understanding roles, impacts, and importance of gender balance in agriculture</p>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="max-w-6xl mx-auto px-6 py-4">
+        <div class="bg-white rounded-full h-3 shadow-inner">
+            <div id="progressBar" class="progress-bar bg-gradient-to-r from-green-500 to-green-600 h-3 rounded-full" style="width: 0%"></div>
+        </div>
+        <p class="text-sm text-gray-600 mt-2 text-center" id="progressText">Progress: 0%</p>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-6 py-8">
+        <!-- Success Criteria -->
+        <section class="section mb-12 bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-center mb-6">
+                <div class="bg-green-100 rounded-full p-3 mr-4">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">Learning Objectives</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="flex items-start space-x-3 p-4 bg-green-50 rounded-lg card-hover">
+                    <span class="text-green-600 font-bold text-xl">1.</span>
+                    <p class="text-gray-700">Explain the meaning of 'gender roles' in agricultural production</p>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-green-50 rounded-lg card-hover">
+                    <span class="text-green-600 font-bold text-xl">2.</span>
+                    <p class="text-gray-700">Determine gender roles in agricultural production</p>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-green-50 rounded-lg card-hover">
+                    <span class="text-green-600 font-bold text-xl">3.</span>
+                    <p class="text-gray-700">Assess the impact of gender roles in agricultural production</p>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-green-50 rounded-lg card-hover">
+                    <span class="text-green-600 font-bold text-xl">4.</span>
+                    <p class="text-gray-700">Recognize the importance of gender balance in agriculture</p>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-green-50 rounded-lg card-hover col-span-full">
+                    <span class="text-green-600 font-bold text-xl">5.</span>
+                    <p class="text-gray-700">Describe women's role in decision-making in agricultural production</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Definitions -->
+        <section class="section mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3">📚</span>
+                Key Definitions
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-blue-500">
+                    <h3 class="text-xl font-bold text-blue-600 mb-3">Gender</h3>
+                    <p class="text-gray-700 leading-relaxed">A set of social and behavioral norms that within a specific culture are widely considered socially appropriate for either male or female. It refers to characteristics that distinguish between males and females in society.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-purple-500">
+                    <h3 class="text-xl font-bold text-purple-600 mb-3">Gender Roles</h3>
+                    <p class="text-gray-700 leading-relaxed">A set of responsibilities assigned to either males or females according to a particular society. These roles define what tasks and duties are expected from each gender.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Traditional Gender Roles -->
+        <section class="section mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Traditional Gender Roles in Agriculture</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Men's Roles -->
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-xl p-8 text-white card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-white rounded-full p-3 mr-4">
+                            <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold">Men's Traditional Roles</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><span class="mr-2">✓</span> Make decisions on resource possession</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Make household decisions</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Fishing activities</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Producing cash crops</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Raising animals</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Heads of family</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Primary breadwinners</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Building animal pens and grain stores</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Employment in estates</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Accessing loans</li>
+                    </ul>
+                </div>
+
+                <!-- Women's Roles -->
+                <div class="bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl shadow-xl p-8 text-white card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-white rounded-full p-3 mr-4">
+                            <svg class="w-8 h-8 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold">Women's Traditional Roles</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><span class="mr-2">✓</span> Growing food crops</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Cooking food</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Drawing water</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Processing food</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Fetching firewood</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Trading and marketing farm produce</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Caring for family members</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Working for wages in farms</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Rearing small livestock</li>
+                        <li class="flex items-start"><span class="mr-2">✓</span> Nursing children</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Key Statistic -->
+            <div class="mt-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl shadow-xl p-8 text-white text-center card-hover">
+                <p class="text-5xl font-bold mb-2">80%</p>
+                <p class="text-xl">of farm work is done by women</p>
+                <p class="mt-4 text-orange-100">Yet women often lack control over financial resources and land ownership</p>
+            </div>
+        </section>
+
+        <!-- Factors Hindering Women -->
+        <section class="section mb-12 bg-white rounded-2xl shadow-xl p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-red-100 rounded-full p-3 mr-4">
+                    <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </span>
+                Barriers Women Face in Agriculture
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-red-50 rounded-xl p-6 card-hover border-t-4 border-red-500">
+                    <h4 class="font-bold text-red-700 mb-3 text-lg">Land Ownership</h4>
+                    <p class="text-gray-700">Under customary laws, women do not own land. Land is predominantly owned by men.</p>
+                </div>
+                <div class="bg-red-50 rounded-xl p-6 card-hover border-t-4 border-red-500">
+                    <h4 class="font-bold text-red-700 mb-3 text-lg">Land Use Decisions</h4>
+                    <p class="text-gray-700">Most decisions on land use are made by men without consulting women.</p>
+                </div>
+                <div class="bg-red-50 rounded-xl p-6 card-hover border-t-4 border-red-500">
+                    <h4 class="font-bold text-red-700 mb-3 text-lg">Access to Credit</h4>
+                    <p class="text-gray-700">Women are often denied credit by husbands and cannot use customary land as loan security.</p>
+                </div>
+                <div class="bg-red-50 rounded-xl p-6 card-hover border-t-4 border-red-500">
+                    <h4 class="font-bold text-red-700 mb-3 text-lg">Extension Services</h4>
+                    <p class="text-gray-700">More men than women access extension and training services in agriculture.</p>
+                </div>
+                <div class="bg-red-50 rounded-xl p-6 card-hover border-t-4 border-red-500">
+                    <h4 class="font-bold text-red-700 mb-3 text-lg">Farm Income Control</h4>
+                    <p class="text-gray-700">Men make decisions on selling produce and using family finances without consultation.</p>
+                </div>
+                <div class="bg-red-50 rounded-xl p-6 card-hover border-t-4 border-red-500">
+                    <h4 class="font-bold text-red-700 mb-3 text-lg">Traditional Views</h4>
+                    <p class="text-gray-700">Women are regarded as weak and cannot own property independently.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact of Gender Imbalance -->
+        <section class="section mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Impact of Gender Imbalances</h2>
+            <div class="bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl shadow-xl p-8 text-white">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex items-center space-x-3 bg-gray-600 bg-opacity-50 rounded-lg p-4">
+                        <span class="text-2xl">⚠️</span>
+                        <p>Women have limited access to credit facilities</p>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-gray-600 bg-opacity-50 rounded-lg p-4">
+                        <span class="text-2xl">📉</span>
+                        <p>Low food production due to exclusion from decision-making</p>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-gray-600 bg-opacity-50 rounded-lg p-4">
+                        <span class="text-2xl">⚖️</span>
+                        <p>Difficulty balancing childcare and farm work</p>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-gray-600 bg-opacity-50 rounded-lg p-4">
+                        <span class="text-2xl">🏞️</span>
+                        <p>Limited access to land ownership</p>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-gray-600 bg-opacity-50 rounded-lg p-4">
+                        <span class="text-2xl">🌱</span>
+                        <p>Inappropriate land preparation and late planting</p>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-gray-600 bg-opacity-50 rounded-lg p-4">
+                        <span class="text-2xl">📊</span>
+                        <p>Low yields and quality of produce</p>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-gray-600 bg-opacity-50 rounded-lg p-4">
+                        <span class="text-2xl">💰</span>
+                        <p>Low household income</p>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-gray-600 bg-opacity-50 rounded-lg p-4">
+                        <span class="text-2xl">🚜</span>
+                        <p>Low adoption of mechanized agriculture</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equal Division of Labour -->
+        <section class="section mb-12 bg-white rounded-2xl shadow-xl p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-green-100 rounded-full p-3 mr-4">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                </span>
+                Principles of Equal Division of Labour
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-green-50 rounded-xl p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">🤝</span>
+                        <h4 class="font-bold text-green-700 text-lg">Teamwork</h4>
+                    </div>
+                    <p class="text-gray-700">Men and women should work together as a unified team in all agricultural activities.</p>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">🔄</span>
+                        <h4 class="font-bold text-green-700 text-lg">Cooperation</h4>
+                    </div>
+                    <p class="text-gray-700">Both genders should cooperate in all farming activities for maximum productivity.</p>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">⚖️</span>
+                        <h4 class="font-bold text-green-700 text-lg">Fair Distribution</h4>
+                    </div>
+                    <p class="text-gray-700">Work on the farm should be distributed fairly based on ability, not gender.</p>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">💬</span>
+                        <h4 class="font-bold text-green-700 text-lg">Consultation</h4>
+                    </div>
+                    <p class="text-gray-700">Both men and women should consult each other on farm decisions and activities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits of Gender Balance -->
+        <section class="section mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Benefits of Gender Balance in Agriculture</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl shadow-lg p-6 text-white card-hover transform transition">
+                    <div class="text-4xl mb-4">🤝</div>
+                    <h4 class="font-bold text-xl mb-3">Genuine Cooperation</h4>
+                    <p>Brings about authentic cooperation and harmony within the family unit.</p>
+                </div>
+                <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl shadow-lg p-6 text-white card-hover transform transition">
+                    <div class="text-4xl mb-4">🏆</div>
+                    <h4 class="font-bold text-xl mb-3">Ownership Feeling</h4>
+                    <p>Promotes positive feelings of ownership in farm enterprises for both partners.</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white card-hover transform transition">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h4 class="font-bold text-xl mb-3">Shared Vision</h4>
+                    <p>Creates shared vision and responsibility as both participate in production.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Women's Role in Decision Making -->
+        <section class="section mb-12 bg-white rounded-2xl shadow-xl p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Women's Role in Decision-Making</h2>
+            <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-6 mb-6">
+                <h3 class="text-xl font-bold text-purple-700 mb-4">Key Contributions:</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex items-start space-x-3">
+                        <span class="text-purple-600 text-2xl">💼</span>
+                        <p class="text-gray-700"><strong>Cash Crops:</strong> Women actively grow and manage cash crops for income generation.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-purple-600 text-2xl">🌾</span>
+                        <p class="text-gray-700"><strong>Food Security:</strong> Women ensure food security by growing diverse food crops.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 rounded-xl p-6">
+                <h3 class="text-xl font-bold text-blue-700 mb-4">Joint Decision-Making Areas:</h3>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <div class="flex items-center space-x-2 bg-white rounded-lg p-3">
+                        <span class="text-blue-600">✓</span>
+                        <p class="text-gray-700">When to start land preparation</p>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white rounded-lg p-3">
+                        <span class="text-blue-600">✓</span>
+                        <p class="text-gray-700">Planting schedules</p>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white rounded-lg p-3">
+                        <span class="text-blue-600">✓</span>
+                        <p class="text-gray-700">Weeding timing</p>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white rounded-lg p-3">
+                        <span class="text-blue-600">✓</span>
+                        <p class="text-gray-700">Harvest planning</p>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white rounded-lg p-3">
+                        <span class="text-blue-600">✓</span>
+                        <p class="text-gray-700">Fertilizer application</p>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white rounded-lg p-3">
+                        <span class="text-blue-600">✓</span>
+                        <p class="text-gray-700">Food crop selection</p>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white rounded-lg p-3">
+                        <span class="text-blue-600">✓</span>
+                        <p class="text-gray-700">Technology adoption</p>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white rounded-lg p-3">
+                        <span class="text-blue-600">✓</span>
+                        <p class="text-gray-700">Marketing and sales decisions</p>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white rounded-lg p-3 md:col-span-2">
+                        <span class="text-blue-600">✓</span>
+                        <p class="text-gray-700">Financial management and resource allocation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section class="section mb-12 bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl shadow-xl p-8 text-white">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <span class="bg-white text-green-600 rounded-full w-12 h-12 flex items-center justify-center mr-4 text-2xl">📝</span>
+                Key Takeaways
+            </h2>
+            <div class="space-y-4">
+                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                    <p class="text-lg">Gender roles in agriculture have traditionally been divided, with women performing the majority of farm work while having limited control over resources and decision-making.</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                    <p class="text-lg">Gender imbalances create significant negative impacts on agricultural productivity, food security, and household income.</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                    <p class="text-lg">Equal participation and gender balance in agriculture leads to better cooperation, shared ownership, increased productivity, and improved family wellbeing.</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                    <p class="text-lg">Both men and women must work together in decision-making for sustainable and successful agricultural production.</p>
+                </div>
+            </div>
+        </section>
+
+        </main>
+
+
+        <script>
+  window.addEventListener("load", () => {
+    document.querySelectorAll(".section").forEach(sec => {
+      sec.classList.add("visible");
+    });
+  });
+</script>
+
+        </body>
+        
+        </html>

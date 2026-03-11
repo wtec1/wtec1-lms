@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Agricultural Cooperatives</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .section {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+        .section:nth-child(6) { animation-delay: 0.6s; }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(to right, #10b981, #3b82f6);
+            z-index: 9999;
+            transition: width 0.2s ease;
+        }
+        
+        .list-item {
+            transition: all 0.2s ease;
+        }
+        
+        .list-item:hover {
+            padding-left: 0.5rem;
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <header class="mb-12 fade-in-up">
+            <div class="bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500">
+                <span class="text-green-600 font-semibold text-sm uppercase tracking-wider">Chapter 7</span>
+                <h1 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Agricultural Cooperatives</h1>
+                <p class="text-lg text-gray-600 leading-relaxed">An agricultural cooperative is an organization where farmers pool their resources to perform agricultural activities collectively, enhancing productivity and efficiency.</p>
+            </div>
+        </header>
+
+        <section class="mb-10 section">
+            <div class="bg-white rounded-xl shadow-md p-8 card">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="bg-blue-500 text-white rounded-lg px-3 py-1 mr-3 text-lg">1</span>
+                    Services Offered
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition list-item">
+                        <span class="text-blue-500 font-bold mt-1">•</span>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Storage</h3>
+                            <p class="text-gray-600 text-sm">Keeping farm produce safe until needed</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition list-item">
+                        <span class="text-blue-500 font-bold mt-1">•</span>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Acquiring Inputs</h3>
+                            <p class="text-gray-600 text-sm">Providing access to agricultural inputs at lower prices</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition list-item">
+                        <span class="text-blue-500 font-bold mt-1">•</span>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Provision of Employment</h3>
+                            <p class="text-gray-600 text-sm">Offering job opportunities to members</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition list-item">
+                        <span class="text-blue-500 font-bold mt-1">•</span>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Marketing</h3>
+                            <p class="text-gray-600 text-sm">Assisting in the sale of farm products</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition list-item">
+                        <span class="text-blue-500 font-bold mt-1">•</span>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Fair Price Negotiation</h3>
+                            <p class="text-gray-600 text-sm">Ensuring better prices for products</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition list-item">
+                        <span class="text-blue-500 font-bold mt-1">•</span>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Record Keeping</h3>
+                            <p class="text-gray-600 text-sm">Maintaining accurate records for deliveries and finances</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition list-item">
+                        <span class="text-blue-500 font-bold mt-1">•</span>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Resource Efficiency</h3>
+                            <p class="text-gray-600 text-sm">Sharing equipment and extension services</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition list-item">
+                        <span class="text-blue-500 font-bold mt-1">•</span>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Transport Services</h3>
+                            <p class="text-gray-600 text-sm">Delivering produce to markets</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition list-item">
+                        <span class="text-blue-500 font-bold mt-1">•</span>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Banking & Loans</h3>
+                            <p class="text-gray-600 text-sm">Financial resources at low interest rates</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10 section">
+            <div class="bg-white rounded-xl shadow-md p-8 card">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="bg-green-500 text-white rounded-lg px-3 py-1 mr-3 text-lg">2</span>
+                    Principles of Agricultural Cooperatives
+                </h2>
+                <div class="space-y-3">
+                    <div class="border-l-4 border-green-500 pl-4 py-2 hover:bg-green-50 transition list-item">
+                        <h3 class="font-semibold text-gray-800">Open and Voluntary Membership</h3>
+                        <p class="text-gray-600 text-sm">Membership is open to all who want to participate</p>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4 py-2 hover:bg-green-50 transition list-item">
+                        <h3 class="font-semibold text-gray-800">Democratic Control</h3>
+                        <p class="text-gray-600 text-sm">Each member has a vote in decision-making</p>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4 py-2 hover:bg-green-50 transition list-item">
+                        <h3 class="font-semibold text-gray-800">Equal Share Limit</h3>
+                        <p class="text-gray-600 text-sm">Limits on the number of shares per member</p>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4 py-2 hover:bg-green-50 transition list-item">
+                        <h3 class="font-semibold text-gray-800">Share Dividends</h3>
+                        <p class="text-gray-600 text-sm">Profits distributed based on shareholding</p>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4 py-2 hover:bg-green-50 transition list-item">
+                        <h3 class="font-semibold text-gray-800">Capital Contribution</h3>
+                        <p class="text-gray-600 text-sm">Members contribute capital</p>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4 py-2 hover:bg-green-50 transition list-item">
+                        <h3 class="font-semibold text-gray-800">Education and Training</h3>
+                        <p class="text-gray-600 text-sm">Providing training and education to members</p>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4 py-2 hover:bg-green-50 transition list-item">
+                        <h3 class="font-semibold text-gray-800">Loyalty</h3>
+                        <p class="text-gray-600 text-sm">Members expected to show loyalty to the cooperative</p>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4 py-2 hover:bg-green-50 transition list-item">
+                        <h3 class="font-semibold text-gray-800">Maturity</h3>
+                        <p class="text-gray-600 text-sm">Mature operations and governance</p>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4 py-2 hover:bg-green-50 transition list-item">
+                        <h3 class="font-semibold text-gray-800">Cooperation with Others</h3>
+                        <p class="text-gray-600 text-sm">Working with other cooperatives for mutual benefits</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10 section">
+            <div class="bg-white rounded-xl shadow-md p-8 card">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="bg-purple-500 text-white rounded-lg px-3 py-1 mr-3 text-lg">3</span>
+                    Formation Considerations
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-purple-50 rounded-lg p-4 hover:shadow-md transition">
+                        <div class="font-semibold text-purple-800 mb-1">Registration</div>
+                        <p class="text-sm text-gray-600">Officially register the cooperative</p>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-4 hover:shadow-md transition">
+                        <div class="font-semibold text-purple-800 mb-1">Name Selection</div>
+                        <p class="text-sm text-gray-600">Choose a suitable name</p>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-4 hover:shadow-md transition">
+                        <div class="font-semibold text-purple-800 mb-1">Constitution</div>
+                        <p class="text-sm text-gray-600">Establish governing rules and regulations</p>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-4 hover:shadow-md transition">
+                        <div class="font-semibold text-purple-800 mb-1">Elect Leaders</div>
+                        <p class="text-sm text-gray-600">Select leaders to manage operations</p>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-4 hover:shadow-md transition">
+                        <div class="font-semibold text-purple-800 mb-1">Common Interest</div>
+                        <p class="text-sm text-gray-600">Ensure shared goals and interests</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10 section">
+            <div class="bg-white rounded-xl shadow-md p-8 card">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="bg-red-500 text-white rounded-lg px-3 py-1 mr-3 text-lg">4</span>
+                    Challenges
+                </h2>
+                <div class="space-y-4">
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg hover:shadow-md transition">
+                        <h3 class="font-bold text-red-800 mb-2">Dishonesty</h3>
+                        <p class="text-gray-700">Issues like adding water to peanuts or milk</p>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg hover:shadow-md transition">
+                        <h3 class="font-bold text-red-800 mb-2">Management Challenges</h3>
+                        <p class="text-gray-700">Lack of capital, misappropriation, corruption, fake contracts, and delayed payments</p>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg hover:shadow-md transition">
+                        <h3 class="font-bold text-red-800 mb-2">Price Fluctuations</h3>
+                        <p class="text-gray-700">Unstable prices affecting profitability</p>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg hover:shadow-md transition">
+                        <h3 class="font-bold text-red-800 mb-2">Shortage of Qualified Personnel</h3>
+                        <p class="text-gray-700">Low salaries leading to insufficient skilled staff</p>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg hover:shadow-md transition">
+                        <h3 class="font-bold text-red-800 mb-2">Insufficient Transport</h3>
+                        <p class="text-gray-700">Poor transport services and bad roads</p>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg hover:shadow-md transition">
+                        <h3 class="font-bold text-red-800 mb-2">Poor Production Techniques</h3>
+                        <p class="text-gray-700">Outdated methods, unfavorable varieties, and primitive tools</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10 section">
+            <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-xl shadow-lg p-8 text-white card">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="bg-white text-green-600 rounded-lg px-3 py-1 mr-3 text-lg">5</span>
+                    Solutions
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm hover:bg-opacity-30 transition list-item">
+                        <div class="font-semibold mb-1">Strict Rules and Guidelines</div>
+                        <p class="text-sm opacity-90">Implement clear policies and procedures</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm hover:bg-opacity-30 transition list-item">
+                        <div class="font-semibold mb-1">Employ Honest Individuals</div>
+                        <p class="text-sm opacity-90">Ensure integrity in staff and members</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm hover:bg-opacity-30 transition list-item">
+                        <div class="font-semibold mb-1">Sales Promotion</div>
+                        <p class="text-sm opacity-90">Create awareness and promote products effectively</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm hover:bg-opacity-30 transition list-item">
+                        <div class="font-semibold mb-1">Hire Qualified Personnel</div>
+                        <p class="text-sm opacity-90">Offer competitive salaries to attract skilled workers</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm hover:bg-opacity-30 transition list-item">
+                        <div class="font-semibold mb-1">Contractual Agreements</div>
+                        <p class="text-sm opacity-90">Formalize agreements to prevent disputes</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm hover:bg-opacity-30 transition list-item">
+                        <div class="font-semibold mb-1">Education</div>
+                        <p class="text-sm opacity-90">Training on modern farming techniques</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm hover:bg-opacity-30 transition list-item">
+                        <div class="font-semibold mb-1">Processing Crops</div>
+                        <p class="text-sm opacity-90">Add value and improve prices</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm hover:bg-opacity-30 transition list-item">
+                        <div class="font-semibold mb-1">Market Research</div>
+                        <p class="text-sm opacity-90">Gather and use market information</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm hover:bg-opacity-30 transition list-item">
+                        <div class="font-semibold mb-1">Improved Transport</div>
+                        <p class="text-sm opacity-90">Better services and road infrastructure</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-500 py-8 fade-in-up">
+            <p class="text-sm">End of Chapter 7: Agricultural Cooperatives</p>
+        </footer>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercentage + '%';
+        });
+    </script>
+</body>
+</html>
